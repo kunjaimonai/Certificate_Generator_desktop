@@ -1,0 +1,74 @@
+{
+  "name": "certificate-generator",
+  "version": "1.0.0",
+  "description": "Hazardous Goods Driver Training Certificate Generator",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "cross-env NODE_ENV=development electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.sreenarayana.certificategenerator",
+    "productName": "Certificate Generator",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "loading.html",
+      "icon.ico"
+    ],
+    "extraResources": [
+      {
+        "from": "../python-backend/dist/CertificateBackend.exe",
+        "to": "python-backend/CertificateBackend.exe"
+      },
+      {
+        "from": "../python-backend/templates",
+        "to": "python-backend/templates"
+      },
+      {
+        "from": "../nextjs-frontend/.next/standalone",
+        "to": "nextjs-frontend/.next/standalone"
+      },
+      {
+        "from": "../nextjs-frontend/.next/static",
+        "to": "nextjs-frontend/.next/static"
+      },
+      {
+        "from": "../nextjs-frontend/public",
+        "to": "nextjs-frontend/public"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Certificate Generator",
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
+      "installerHeaderIcon": "icon.ico",
+      "license": "LICENSE.txt",
+      "warningsAsErrors": false
+    }
+  },
+  "author": "V S YADU KRISHNAN",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^39.2.7",
+    "electron-builder": "^26.0.12",
+    "cross-env": "^10.1.0"
+  }
+}
